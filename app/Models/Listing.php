@@ -33,4 +33,10 @@ class Listing extends Model
         return $this->hasMany(Booking::class, 'listing_id');
     }
 
+
+    public function owner()
+    {
+        return $this->belongsTo(User::class, 'owner_id');
+    }
+
 }

@@ -51,4 +51,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Booking::class, 'tourist_id');
     }
+
+    public function owner()
+    {
+        return $this->belongsTo(User::class, 'owner_id');
+    }
 }

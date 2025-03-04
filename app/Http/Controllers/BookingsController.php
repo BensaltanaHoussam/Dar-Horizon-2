@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Booking;
 use App\Models\Listing;
+use App\Notifications\NewBookingNotification;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -61,7 +62,14 @@ class BookingsController extends Controller
         $booking->check_in = $request->check_in;
         $booking->check_out = $request->check_out;
         $booking->total_price = $this->calculatePrice($request->listing_id, $request->check_in, $request->check_out);
+        $booking->status = 'pending'; 
+        $booking->payment_status = 'pending';
         $booking->save();
+
+        $listing = Listing::with('owner')->find($request->listing_id);
+        if ($listing && $listing->owner) {
+            $listing->owner->notify(new NewBookingNotification($booking));
+        }
 
         return redirect()->back()->with('success', 'Booking successfully created!');
     }
