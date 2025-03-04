@@ -5,7 +5,7 @@
 
             <!-- Left: Logo -->
             <div class="flex items-center">
-              <img class="w-[120px] filter brightness-0 invert" src="{{ asset('assets/img/Logo.png') }}" alt="logo">
+                <img class="w-[120px] filter brightness-0 invert" src="{{ asset('assets/img/Logo.png') }}" alt="logo">
             </div>
 
             <!-- Center: Navigation Links (Hidden on mobile) -->
@@ -18,7 +18,10 @@
                     class="text-white hover:text-white transition-colors duration-200 {{ request()->routeIs('tourist.favorites') ? 'text-blue-500' : '' }}">
                     Listings
                 </x-nav-link>
-                <x-nav-link href="#">Services</x-nav-link>
+                <x-nav-link :href="route('owner.bookings')" :active="request()->routeIs('owner.bookings')"
+                    class="text-white hover:text-white transition-colors duration-200 {{ request()->routeIs('tourist.favorites') ? 'text-blue-500' : '' }}">
+                    Bookings
+                </x-nav-link>
                 <x-nav-link href="#">Contact</x-nav-link>
             </div>
 
@@ -26,21 +29,27 @@
             <div class="hidden sm:flex items-center space-x-6">
                 @auth
                     <div class="relative" x-data="{ dropdownOpen: false }">
-                        <button @click="dropdownOpen = !dropdownOpen" class="flex items-center space-x-2 focus:outline-none group">
-                            <span class="text-gray-300 group-hover:text-white transition-colors duration-200">{{ Auth::user()->name }}</span>
-                            <svg class="w-5 h-5 text-gray-400 group-hover:text-white transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        <button @click="dropdownOpen = !dropdownOpen"
+                            class="flex items-center space-x-2 focus:outline-none group">
+                            <span
+                                class="text-gray-300 group-hover:text-white transition-colors duration-200">{{ Auth::user()->name }}</span>
+                            <svg class="w-5 h-5 text-gray-400 group-hover:text-white transition-colors duration-200"
+                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                                </path>
                             </svg>
                         </button>
                         <!-- Dropdown Menu -->
                         <div x-show="dropdownOpen" @click.away="dropdownOpen = false"
                             class="absolute right-0 mt-2 w-48 bg-gray-900 text-gray-300 rounded-md shadow-lg border border-gray-800 z-50">
-                            <x-dropdown-link :href="route('profile.edit')" class="px-4 py-2 block hover:bg-gray-800 transition-colors duration-200">
+                            <x-dropdown-link :href="route('profile.edit')"
+                                class="px-4 py-2 block hover:bg-gray-800 transition-colors duration-200">
                                 Profile
                             </x-dropdown-link>
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
-                                <x-dropdown-link :href="route('logout')" class="px-4 py-2 block hover:bg-gray-800 transition-colors duration-200"
+                                <x-dropdown-link :href="route('logout')"
+                                    class="px-4 py-2 block hover:bg-gray-800 transition-colors duration-200"
                                     onclick="event.preventDefault(); this.closest('form').submit();">
                                     Log Out
                                 </x-dropdown-link>
@@ -48,8 +57,11 @@
                         </div>
                     </div>
                 @else
-                    <a href="{{ route('login') }}" class="text-gray-300 hover:text-white transition-colors duration-200">Login</a>
-                    <a href="{{ route('register') }}" class="bg-white text-black px-5 py-2 rounded-md hover:bg-gray-200 transition-colors duration-200">Sign Up</a>
+                    <a href="{{ route('login') }}"
+                        class="text-gray-300 hover:text-white transition-colors duration-200">Login</a>
+                    <a href="{{ route('register') }}"
+                        class="bg-white text-black px-5 py-2 rounded-md hover:bg-gray-200 transition-colors duration-200">Sign
+                        Up</a>
                 @endauth
             </div>
 

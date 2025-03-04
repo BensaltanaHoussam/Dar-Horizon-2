@@ -56,10 +56,7 @@ class ListingController extends Controller
 
     public function destroy(Listing $listing)
     {
-
         $listing->delete();
-
-
         return redirect()->route('owner.posts')->with('success', 'Listing deleted successfully');
     }
 

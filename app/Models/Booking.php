@@ -15,7 +15,8 @@ class Booking extends Model
         'check_in',
         'check_out',
         'total_price',
-        'payment_status'
+        'payment_status',
+        'status'
     ];
 
     public function listing()
@@ -27,4 +28,12 @@ class Booking extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function tourist()
+    {
+        return $this->belongsTo(User::class, 'tourist_id');
+    }
+
+
+
 }

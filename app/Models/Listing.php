@@ -27,4 +27,10 @@ class Listing extends Model
         'available_from',
         'available_until',
     ];
+
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class, 'listing_id');
+    }
+
 }
