@@ -303,6 +303,22 @@
                             €{{ number_format($listing->price, 2) }} / night
                         </div>
                     </div>
+
+                    <form action="{{ route('favorites.store', $listing->id) }}" method="POST" class="mt-3">
+                        @csrf
+                        <button
+                            class="absolute top-3 left-3 bg-white p-2 rounded-full shadow-md hover:bg-gray-100 transition">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                class="h-5 w-5 {{ $listing->is_favorite ? 'text-black' : 'text-gray-400' }}"
+                                fill="{{ $listing->is_favorite ? 'currentColor' : 'none' }}" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                            </svg>
+                        </button>
+                    </form>
+
+
                     <div class="p-5">
                         <h3 class="font-bold text-xl mb-2 text-black">{{ $listing->title }}</h3>
                         <div class="flex items-center text-gray-600 mb-3">
@@ -321,8 +337,7 @@
                                 {{ $listing->available_from }} - {{ $listing->available_until }}
                             </span>
                             <!-- Reserve Now Button -->
-                            <button type="button" 
-                                onclick="openModal('bookingModal-{{ $listing->id }}')"
+                            <button type="button" onclick="openModal('bookingModal-{{ $listing->id }}')"
                                 class="text-white bg-black border hover:bg-white hover:text-black text-sm font-medium py-2 px-4 rounded-lg transition-all duration-300">
                                 Reserve Now
                             </button>
@@ -331,15 +346,16 @@
                 </div>
 
                 <!-- Modal for booking -->
-                <div id="bookingModal-{{ $listing->id }}" 
+                <div id="bookingModal-{{ $listing->id }}"
                     class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center">
                     <div class="bg-white p-8 rounded-lg shadow-xl max-w-md w-full mx-4">
                         <div class="flex justify-between items-center mb-6">
                             <h3 class="text-xl font-bold text-gray-900">Reserve {{ $listing->title }}</h3>
-                            <button type="button" onclick="closeModal('bookingModal-{{ $listing->id }}')" 
+                            <button type="button" onclick="closeModal('bookingModal-{{ $listing->id }}')"
                                 class="text-gray-400 hover:text-gray-500">
                                 <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M6 18L18 6M6 6l12 12" />
                                 </svg>
                             </button>
                         </div>
@@ -349,22 +365,33 @@
                             <input type="hidden" name="listing_id" value="{{ $listing->id }}">
 
                             <div>
-                                <label for="check_in-{{ $listing->id }}" class="block text-sm font-medium text-gray-700 mb-1">Check-in Date</label>
-                                <input type="text" id="check_in-{{ $listing->id }}" name="check_in" 
+                                <label for="check_in-{{ $listing->id }}"
+                                    class="block text-sm font-medium text-gray-700 mb-1">Check-in Date</label>
+                                <input type="text" id="check_in-{{ $listing->id }}" name="check_in"
                                     class="w-full p-2 border border-gray-300 rounded-md focus:ring-black focus:border-black">
                             </div>
 
                             <div>
-                                <label for="check_out-{{ $listing->id }}" class="block text-sm font-medium text-gray-700 mb-1">Check-out Date</label>
+                                <label for="check_out-{{ $listing->id }}"
+                                    class="block text-sm font-medium text-gray-700 mb-1">Check-out Date</label>
                                 <input type="text" id="check_out-{{ $listing->id }}" name="check_out"
                                     class="w-full p-2 border border-gray-300 rounded-md focus:ring-black focus:border-black">
                             </div>
 
-                            <button type="submit" 
-                                class="w-full bg-black text-white py-2 px-4 rounded-md hover:bg-gray-800 transition-colors duration-300">
-                                Confirm Booking
-                            </button>
+                            <div class="space-y-4">
+                                <button type="submit" name="action" value="book_and_pay"
+                                    class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                    Book and Pay with PayPal
+                                </button>
+
+                                <button type="submit" name="action" value="book_only"
+                                    class="w-full bg-black text-white py-2 px-4 rounded-md hover:bg-gray-800 transition-colors duration-300">
+                                    Book Now, Pay Later
+                                </button>
+                            </div>
                         </form>
+
+
                     </div>
                 </div>
             @endforeach
@@ -501,7 +528,7 @@
         });
 
 
- 
+
 
 
         document.addEventListener('DOMContentLoaded', function () {
@@ -538,7 +565,7 @@
             @endforeach
         });
 
-        
+
         function openModal(modalId) {
             document.getElementById(modalId).classList.remove('hidden');
             document.body.style.overflow = 'hidden';
@@ -549,21 +576,18 @@
             document.body.style.overflow = 'auto';
         }
 
-        document.addEventListener('click', function(event) {
+        document.addEventListener('click', function (event) {
             if (event.target.classList.contains('fixed')) {
                 event.target.classList.add('hidden');
                 document.body.style.overflow = 'auto';
             }
         });
 
+
+
+
+
     </script>
 
-    <style>
-        .modal-content {
-            position: relative;
-            max-width: 500px;
-            width: 90%;
-            margin: 2rem auto;
-        }
-    </style>
+
 </x-app-layout>

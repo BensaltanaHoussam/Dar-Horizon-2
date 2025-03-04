@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BookingsController;
 use App\Http\Controllers\FavoriteController;
+use App\Http\Controllers\PayPalController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\homeController;
 use App\Http\Controllers\ownerController;
@@ -53,6 +54,11 @@ Route::middleware('auth')->group(function () {
     Route::match(['get', 'post'], '/tourist/search', [TouristController::class, 'touristSearch'])->name('search');
     Route::post('/favorites/{listing}', [FavoriteController::class, 'store'])->name('favorites.store');
     Route::delete('/favorites/{listing}', [FavoriteController::class, 'destroy'])->name('favorites.destroy');
+
+
+    Route::post('/paypal/create-payment/{booking}', [PayPalController::class, 'createPayment'])->name('paypal.create');
+    Route::get('/paypal/success/{booking}', [PayPalController::class, 'success'])->name('paypal.success');
+    Route::get('/paypal/cancel/{booking}', [PayPalController::class, 'cancel'])->name('paypal.cancel');
 
 
 
