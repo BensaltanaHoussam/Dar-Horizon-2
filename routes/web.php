@@ -87,4 +87,14 @@ Route::middleware('auth')->group(function () {
 
 });
 
+
+
+Route::get('/test-email', function () {
+    Mail::raw('Test email', function ($message) {
+        $message->to('bensaltana07@gmail.com')
+            ->subject('Test Email');
+    });
+    return 'Email sent!';
+});
+
 require __DIR__ . '/auth.php';

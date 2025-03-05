@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Booking;
+use App\Notifications\BookingPaymentConfirmation;
 use Illuminate\Http\Request;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 
@@ -11,7 +12,7 @@ class PayPalController extends Controller
     public function createPayment(Request $request, $bookingId)
     {
         $booking = Booking::findOrFail($bookingId);
-        
+
         $provider = new PayPalClient;
         $provider->setApiCredentials(config('paypal'));
         $provider->getAccessToken();
@@ -49,7 +50,7 @@ class PayPalController extends Controller
         $provider = new PayPalClient;
         $provider->setApiCredentials(config('paypal'));
         $provider->getAccessToken();
-        
+
         $response = $provider->capturePaymentOrder($request->token);
 
         if (isset($response['status']) && $response['status'] == 'COMPLETED') {
@@ -58,12 +59,16 @@ class PayPalController extends Controller
             $booking->status = Booking::STATUS_CONFIRMED;
             $booking->save();
 
+
+
+            $booking->tourist->notify(new BookingPaymentConfirmation($booking));
+
             return redirect()->route('tourist.bookings')
                 ->with('success', 'Payment completed successfully!');
         }
 
         return redirect()->route('tourist.bookings')
-                ->with('error', 'Payment failed. Please try again.');
+            ->with('error', 'Payment failed. Please try again.');
     }
 
     public function cancel(Request $request, $bookingId)
@@ -73,6 +78,6 @@ class PayPalController extends Controller
         $booking->save();
 
         return redirect()->route('tourist.bookings')
-                ->with('error', 'Payment cancelled.');
+            ->with('error', 'Payment cancelled.');
     }
 }

@@ -10,6 +10,13 @@ class Booking extends Model
     use HasFactory;
 
 
+    protected $casts = [
+        'check_in' => 'datetime',
+        'check_out' => 'datetime',
+        'booking_date' => 'datetime'
+    ];
+
+
     // Define status constants
     const STATUS_PENDING = 'pending';
     const STATUS_ACCEPTED = 'accepted';
