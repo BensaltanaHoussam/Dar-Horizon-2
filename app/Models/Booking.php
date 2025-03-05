@@ -10,6 +10,17 @@ class Booking extends Model
     use HasFactory;
 
 
+    // Define status constants
+    const STATUS_PENDING = 'pending';
+    const STATUS_ACCEPTED = 'accepted';
+    const STATUS_REJECTED = 'rejected';
+    const STATUS_CONFIRMED = 'confirmed';
+
+    // Define payment status constants
+    const PAYMENT_PENDING = 'pending';
+    const PAYMENT_PAID = 'paid';
+    const PAYMENT_CANCELLED = 'cancelled';
+
     protected $fillable = [
         'tourist_id',
         'listing_id',
@@ -20,6 +31,26 @@ class Booking extends Model
         'payment_status',
         'status'
     ];
+
+    public static function getAllowedStatuses()
+    {
+        return [
+            self::STATUS_PENDING,
+            self::STATUS_ACCEPTED,
+            self::STATUS_REJECTED,
+            self::STATUS_CONFIRMED,
+        ];
+    }
+
+
+    public static function getAllowedPaymentStatuses()
+    {
+        return [
+            self::PAYMENT_PENDING,
+            self::PAYMENT_PAID,
+            self::PAYMENT_CANCELLED,
+        ];
+    }
 
 
 

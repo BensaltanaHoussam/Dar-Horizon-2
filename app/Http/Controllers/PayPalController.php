@@ -54,8 +54,8 @@ class PayPalController extends Controller
 
         if (isset($response['status']) && $response['status'] == 'COMPLETED') {
             $booking = Booking::find($bookingId);
-            $booking->payment_status = 'paid';
-            $booking->status = 'confirmed';
+            $booking->payment_status = Booking::PAYMENT_PAID;
+            $booking->status = Booking::STATUS_CONFIRMED;
             $booking->save();
 
             return redirect()->route('tourist.bookings')
@@ -69,7 +69,7 @@ class PayPalController extends Controller
     public function cancel(Request $request, $bookingId)
     {
         $booking = Booking::find($bookingId);
-        $booking->payment_status = 'cancelled';
+        $booking->payment_status = Booking::PAYMENT_CANCELLED;
         $booking->save();
 
         return redirect()->route('tourist.bookings')
