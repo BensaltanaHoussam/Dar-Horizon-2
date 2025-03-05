@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Booking extends Model
 {
     use HasFactory;
+
+
     protected $fillable = [
         'tourist_id',
         'listing_id',
@@ -18,6 +20,9 @@ class Booking extends Model
         'payment_status',
         'status'
     ];
+
+
+
 
     public function listing()
     {
