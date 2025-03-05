@@ -117,32 +117,32 @@
                         class="text-gray-300 font-semibold tracking-wide hover:text-white transition-colors ml-1">Register here</a></p>
             </form>
 
-            <div class="h-full md:py-6 flex flex-col items-center justify-center relative max-md:before:hidden before:absolute before:bg-gradient-to-r before:from-dark before:via-darkgray before:to-dark before:h-full before:w-3/4 before:right-0 before:z-0">
-                <div class="z-50 relative flex flex-col items-center lg:w-4/5 md:w-11/12">
-                    <img src="{{ asset('assets/img/Logo.png') }}" class="w-48 mb-6 grayscale contrast-125" alt="Logo" />
-                    
-                    <div class="bg-darkgray bg-opacity-80 p-6 rounded-lg text-center mb-8 w-full">
-                        <h2 class="text-white text-2xl font-bold mb-3">Discover Extraordinary Homes</h2>
-                        <p class="text-gray-300 leading-relaxed">
-                            Explore spectacular properties across Spain, Morocco, and Portugal. From Mediterranean villas with ocean views to historic riads nestled in ancient medinas, find your perfect escape in these captivating destinations.
-                        </p>
-                        <div class="flex justify-center mt-4 space-x-6">
-                            <div class="text-center">
-                                <span class="block text-white text-xl font-bold">Spain</span>
-                                <span class="text-gray-400 text-sm">Coastal Villas</span>
-                            </div>
-                            <div class="text-center">
-                                <span class="block text-white text-xl font-bold">Morocco</span>
-                                <span class="text-gray-400 text-sm">Historic Riads</span>
-                            </div>
-                            <div class="text-center">
-                                <span class="block text-white text-xl font-bold">Portugal</span>
-                                <span class="text-gray-400 text-sm">Rustic Estates</span>
-                            </div>
+            <div
+            class="h-full md:py-6 flex flex-col items-center justify-center relative max-md:before:hidden before:absolute before:bg-gradient-to-r before:from-black before:via-gray-800 before:to-black before:h-full before:w-3/4 before:right-0 before:z-0">
+            <div class="z-50 relative flex flex-col items-center lg:w-4/5 md:w-11/12">
+                <img src="{{ asset('assets/img/Logo.png') }}" class="w-48 mb-6 grayscale contrast-125" alt="Logo" />
+
+                <div class="bg-black bg-opacity-80 p-6 rounded-lg text-center mb-8 w-full">
+                    <h2 class="text-white text-2xl font-bold mb-3">Join Our Community</h2>
+                    <p class="text-gray-300 leading-relaxed">
+                        Create an account to unlock exclusive access to premium properties across Spain, Morocco,
+                        and Portugal. Whether you're looking to book your dream vacation or list your property,
+                        we've got you covered.
+                    </p>
+                    <div class="flex justify-center mt-4 space-x-6">
+                        <div class="text-center">
+                            <span class="block text-white text-xl font-bold">Tourist</span>
+                            <span class="text-gray-400 text-sm">Book Properties</span>
+                        </div>
+                        <div class="text-center">
+                            <span class="block text-white text-xl font-bold">Owner</span>
+                            <span class="text-gray-400 text-sm">List Properties</span>
                         </div>
                     </div>
                 </div>
+
             </div>
+        </div>
         </div>
     </div>
 

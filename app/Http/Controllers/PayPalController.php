@@ -59,7 +59,6 @@ class PayPalController extends Controller
             $booking->status = Booking::STATUS_CONFIRMED;
             $booking->save();
 
-
             $booking->tourist->notify(new BookingPaymentConfirmation($booking));
 
             return redirect()->route('tourist.bookings')
