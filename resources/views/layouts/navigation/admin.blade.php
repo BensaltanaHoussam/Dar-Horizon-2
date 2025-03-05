@@ -38,7 +38,7 @@
                         </button>
                         <!-- Dropdown Menu -->
                         <div x-show="dropdownOpen" @click.away="dropdownOpen = false"
-                            class="absolute right-0 mt-2 w-48 bg-gray-900 text-gray-300 rounded-md shadow-lg border border-gray-800 z-50">
+                            class="absolute right-0 mt-2 w-48 bg-black text-white rounded-md shadow-lg border border-gray-800 z-50">
                             <x-dropdown-link :href="route('profile.edit')"
                                 class="px-4 py-2 block hover:bg-gray-800 transition-colors duration-200">
                                 Profile
@@ -88,7 +88,7 @@
             </x-nav-link>
             <x-nav-link href="#">Services</x-nav-link>
             <x-nav-link href="#">Contact</x-nav-link>
-        </div>
+        </div>1
 
         <!-- Responsive Settings Options -->
         @auth

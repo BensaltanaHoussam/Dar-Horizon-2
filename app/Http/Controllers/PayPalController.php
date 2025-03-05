@@ -60,7 +60,6 @@ class PayPalController extends Controller
             $booking->save();
 
 
-
             $booking->tourist->notify(new BookingPaymentConfirmation($booking));
 
             return redirect()->route('tourist.bookings')
