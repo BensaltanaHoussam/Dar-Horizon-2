@@ -31,6 +31,7 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('admin/adminDashboard', [homeController::class, 'adminIndex'])->middleware(['auth', 'admin'])->name('admin.adminDashboard');
+    Route::get('admin/bookingsStats', [homeController::class, 'adminStatistiques'])->middleware(['auth', 'admin'])->name('admin.bookingsStats');
     Route::delete('/admin/listings/{listing}', [HomeController::class, 'deleteListing'])->name('admin.listings.delete');
 
 });

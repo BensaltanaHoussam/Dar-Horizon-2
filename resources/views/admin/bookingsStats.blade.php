@@ -9,129 +9,118 @@
         <div class="max-w-8xl mx-auto sm:px-6 lg:px-8">
             <!-- Statistics Cards -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                <!-- Total Users Card -->
+                <!-- Total Bookings Card -->
                 <div class="bg-white overflow-hidden shadow-sm rounded-lg border border-gray-200">
                     <div class="p-6">
                         <div class="flex items-center">
                             <div class="p-3 rounded-full bg-gray-900 bg-opacity-75">
                                 <svg class="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z">
-                                    </path>
+                                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                 </svg>
                             </div>
                             <div class="ml-5">
-                                <h3 class="text-lg font-semibold text-gray-700">Total Users</h3>
-                                <p class="text-3xl font-bold text-gray-900">{{ $stats['total_users'] }}</p>
+                                <h3 class="text-lg font-semibold text-gray-700">Total Bookings</h3>
+                                <p class="text-3xl font-bold text-gray-900">{{ $stats['total_bookings'] }}</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Active Listings Card -->
+                <!-- Total Revenue Card -->
                 <div class="bg-white overflow-hidden shadow-sm rounded-lg border border-gray-200">
                     <div class="p-6">
                         <div class="flex items-center">
                             <div class="p-3 rounded-full bg-gray-900 bg-opacity-75">
                                 <svg class="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4">
-                                    </path>
+                                        d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
                             </div>
                             <div class="ml-5">
-                                <h3 class="text-lg font-semibold text-gray-700">Active Listings</h3>
-                                <p class="text-3xl font-bold text-gray-900">{{ $stats['active_listings'] }}</p>
+                                <h3 class="text-lg font-semibold text-gray-700">Total Revenue</h3>
+                                <p class="text-3xl font-bold text-gray-900">
+                                    €{{ number_format($stats['total_revenue'], 2) }}</p>
                             </div>
                         </div>
                     </div>
                 </div>
-
-
-        
             </div>
 
-
-
-
-
-
-            <!-- Listings Table -->
-            <div class="bg-white overflow-hidden shadow-sm rounded-lg border border-gray-200">
+            <!-- Bookings Table -->
+            <div class="bg-white overflow-hidden shadow-sm rounded-lg border border-gray-200 mb-8">
                 <div class="p-6">
-                    <h2 class="text-xl font-semibold text-gray-900 mb-4">All Listings</h2>
+                    <h2 class="text-xl font-semibold text-gray-900 mb-4">Recent Bookings</h2>
                     <div class="overflow-x-auto">
                         <table class="min-w-full divide-y divide-gray-200">
                             <thead class="bg-gray-50">
                                 <tr>
                                     <th
                                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Title</th>
+                                        Booking ID</th>
                                     <th
                                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Description</th>
+                                        Property</th>
                                     <th
                                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Location</th>
+                                        Tourist</th>
                                     <th
                                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Price</th>
+                                        Check-in</th>
                                     <th
                                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Available From</th>
+                                        Check-out</th>
                                     <th
                                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Available Until</th>
+                                        Amount</th>
                                     <th
                                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Country</th>
+                                        Status</th>
                                     <th
                                         class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Action</th>
+                                        Payment</th>
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
-                                @forelse($listings as $listing)
-                                    <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">{{ $listing->title }}</td>
-                                        <td class="px-6 py-4">{{ Str::limit($listing->description, 50) }}</td>
-                                        <td class="px-6 py-4 whitespace-nowrap">{{ $listing->location }}</td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            €{{ number_format($listing->price, 2) }}/night</td>
-                                        <td class="px-6 py-4 whitespace-nowrap">{{ $listing->available_from }}</td>
-                                        <td class="px-6 py-4 whitespace-nowrap">{{ $listing->available_until }}</td>
-                                        <td class="px-6 py-4 whitespace-nowrap">{{ $listing->country }}</td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <form action="{{ route('admin.listings.delete', $listing) }}" method="POST"
-                                                class="inline">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit"
-                                                    onclick="return confirm('Are you sure you want to delete this listing?')"
-                                                    class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md text-sm transition-colors duration-200">
-                                                    Delete
-                                                </button>
-                                            </form>
-                                        </td>
-                                    </tr>
+                                @forelse($bookings as $booking)
+                                                            <tr>
+                                                                <td class="px-6 py-4 whitespace-nowrap">#{{ $booking->id }}</td>
+                                                                <td class="px-6 py-4">{{ $booking->listing->title }}</td>
+                                                                <td class="px-6 py-4">{{ $booking->tourist->name }}</td>
+                                                                <td class="px-6 py-4">{{ $booking->check_in->format('M d, Y') }}</td>
+                                                                <td class="px-6 py-4">{{ $booking->check_out->format('M d, Y') }}</td>
+                                                                <td class="px-6 py-4">€{{ number_format($booking->total_price, 2) }}</td>
+                                                                <td class="px-6 py-4">
+                                                                    <span class="px-2 py-1 text-sm rounded-full 
+                                                            {{ $booking->status === 'confirmed' ? 'bg-green-100 text-green-800' :
+                                    ($booking->status === 'rejected' ? 'bg-red-100 text-red-800' :
+                                        'bg-yellow-100 text-yellow-800') }}">
+                                                                        {{ ucfirst($booking->status) }}
+                                                                    </span>
+                                                                </td>
+                                                                <td class="px-6 py-4">
+                                                                    <span class="px-2 py-1 text-sm rounded-full 
+                                                            {{ $booking->payment_status === 'paid' ? 'bg-green-100 text-green-800' :
+                                    ($booking->payment_status === 'cancelled' ? 'bg-red-100 text-red-800' :
+                                        'bg-yellow-100 text-yellow-800') }}">
+                                                                        {{ ucfirst($booking->payment_status) }}
+                                                                    </span>
+                                                                </td>
+                                                            </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="8" class="px-6 py-4 text-center text-gray-500">
-                                            No listings found
-                                        </td>
+                                        <td colspan="8" class="px-6 py-4 text-center text-gray-500">No bookings found</td>
                                     </tr>
                                 @endforelse
                             </tbody>
                         </table>
                     </div>
-
                     <!-- Pagination -->
                     <div class="mt-4">
-                        {{ $listings->links() }}
+                        {{ $bookings->links() }}
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 
